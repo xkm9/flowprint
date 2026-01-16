@@ -23,6 +23,7 @@ The current version of Flowprint serves as a "Proof of Concept." Its primary goa
 ## 🛠️ Getting Started
 1. **Clone & Setup:**
    ```bash
-   git clone git@github.com:YOUR_USERNAME/Flowprint.git
-   cd Flowprint
+   git clone git@github.com:xkm9/flowprint.git
+   cd flowprint
    pip install rich
+   p -m main
