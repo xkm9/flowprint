@@ -18,7 +18,7 @@ make sure you have the libraries: rich , pathlib installed before running the pr
 
 - the tool is in early versions and im just a jr coder in python so the code may not be the best but i will update it with time.
 
-- `git clone git@github.com:xkm9/flowprint.com.git`
+- `git clone git@github.com:xkm9/flowprint.git`
 
 **Made by:** AuvaO  
 *(I'm not a native English speaker, so sorry if my grammar is not perfect.)*
