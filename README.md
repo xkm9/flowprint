@@ -1,8 +1,8 @@
 # flowprint
 
-its a tool  made to analyze - track the code process , adding prints statements in targeted inject points , under if conditions , or def functions or import lines to know what is going on live in your code.
+its a tool  made to analyze - track the code process , adding print statements in targeted inject points , under if conditions , or def functions or import lines to know what is going on live in your code.
 
-- you set the dir then the targeted file and when typing `-fp scan` it'll show you how many available injecting are in your code
+- you set the dir then the targeted file and when typing `-fp scan` it'll show you how many available injecting points are in your code
 - and if you type `-fp -s scan` it'll show all points and its line numbers.
 
 - `-fp inject` will help you inject print statements into your code with commands like `-fp inject def` or `-fp inject import` with tags to notice where were the prints written.
@@ -18,7 +18,7 @@ make sure you have the libraries: rich , pathlib installed before running the pr
 
 - the tool is in early versions and im just a jr coder in python so the code may not be the best but i will update it with time.
 
-- `git clone https://github.com/xkm9/flowprint.com`
+- `git clone git@github.com:xkm9/flowprint.com.git`
 
 **Made by:** AuvaO  
 *(I'm not a native English speaker, so sorry if my grammar is not perfect.)*
