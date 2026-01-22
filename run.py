@@ -1,10 +1,11 @@
-import os , json , random , tracemalloc
+# standard libs
+import os , random
 
 from rich.console import Console
 from pathlib import Path
 
 # summon my homemade lib
-from flowprint.lib.homemade import search, randomize , pickfile , p_filtered 
+from flowprint.lib.homemade import search, randomize , pickfile , pro_felter
 
 # commands
 inject_cmds = ["inject"]
@@ -19,26 +20,34 @@ target_match = []
 # where inputs go
 inputs = []
 
-
+# to check when exit command
 check_exit = []
 
+# the file lines will be packed - injected here.
 packed_files = []
+
+# for the name of the file
 targeted_file = []
 
+# here is a tuples list holds a trio of : the line number , the line itself , and pattern to be injected 
 tuples_scan = []
 
+# i forgot whats this for
 path1 = []
 
-
+#  file name with random keys added
 rnd_f = []
 
+# tuples scan len number will be added here
 ts_len = []
 
+# the main dictionary
 dic = {
-            "command type": inj_match ,
-            "fn type": target_match,
+            "command type": inj_match , # inject match
+            "fn type": target_match,  # targect funcs
             "source code": packed_files
             }
+
 
 def path():
     path0 = []
@@ -76,7 +85,7 @@ def add_dir():
     os.chdir(v0)
 
 
-def reset():
+def reset_dir():
     c = Console()
 
     home = Path.home()
@@ -224,7 +233,7 @@ def scan():
     c = Console()    
     c.print(f"file is scanned , availabe injections are {len(tuples_scan)} points. ",style='bold underline')
 
-    pro_filter = p_filtered(inputs , ["-s"])
+    pro_filter = pro_felter(inputs , ["-s"])
 
     if pro_filter != None:
         for i ,(index , line , pattern ) in enumerate(tuples_scan):
@@ -269,7 +278,7 @@ def runner():
                             setup()
 
                         elif isc2 == "reset-dir":
-                            reset()
+                            reset_dir()
 
 
                     # cleaning

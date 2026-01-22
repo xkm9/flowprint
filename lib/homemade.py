@@ -2,7 +2,7 @@ import random , os
 from flowprint.lib.patterns import built_in_patterns as bip
 
 
-def filtered(message,target):
+def felter(message,target):
 
 
     targeted_commands = target
@@ -18,7 +18,7 @@ def filtered(message,target):
     return found if found else None
 
 
-def p_filtered(l,t):
+def pro_felter(l,t):
     found = []
     list1 = l
     target = t
@@ -35,7 +35,7 @@ def p_filtered(l,t):
 
 
 
-def d_filtered(msg,target):
+def deep_felter(msg,target):
 
     results = []
 
