@@ -4,7 +4,7 @@ built_in_patterns = {
         "def" : """    # a def statement\n    print('def statement')\n""",
         "import": """# an import statement\nprint('import statement')\n""",
         "while": """    # here is while loop statement\n    print('while loop statement')\n""",
-        "for": """    # a for loop statement\n    print('for loop statement')\n""",
+        "for": """    print('for loop statement')\n""",
         "if": """    #a if condition statement\n    print('if statement')\n""",
         "elif" : """    # a elif condition statement\n    print('elif statement)\n"""
 
