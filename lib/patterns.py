@@ -1,12 +1,12 @@
 built_in_patterns = {
 
-        "class": """    print('class statement')\n""",
-        "def" : """    print('def statement')\n""",
-        "import": """print('import statement')\n""",
-        "for" : """    print('for loop statement')\n""",
-        "while": """    print('while loop statement')\n""",
-        "if": """    print('if statement')\n""",
-        "elif" : """    print('elif statement)\n"""
+        "class": """    # a class statement\n    print('class statement')\n""",
+        "def" : """    # a def statement\n    print('def statement')\n""",
+        "import": """# an import statementn\nprint('import statement')\n""",
+        "for" : """    # for loop statement\n    print('for loop statement')\n""",
+        "while": """    # here is while loop statement\n    print('while loop statement')\n""",
+        "if": """    #a if condition statement\n    print('if statement')\n""",
+        "elif" : """    # a elif condition statement\n    print('elif statement)\n"""
 
 
         }
