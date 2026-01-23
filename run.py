@@ -2,15 +2,16 @@
 import os , random
 
 from rich.console import Console
+from rich.markup import escape
 from pathlib import Path
+from collections import Counter
 
 # summon my homemade lib
-from flowprint.lib.homemade import search, randomize , pickfile , pro_felter
+from flowprint.lib.homemade import search, randomize , pickfile , pro_felter , pro_felter2
 
 # commands
 inject_cmds = ["inject"]
-target_funcs = ["class","def", "import","for","while"]
-app_cmds = ['cmd','exit']
+target_funcs = ["class","def", "import","while","if","elif" ]
 
 
 # where matches go 
@@ -96,7 +97,7 @@ def reset_dir():
 def setup():
 
     c = Console()
-    c.print(f"current path is {os.getcwd()}\n",style='bold')
+    c.print(f"\ncurrent path is {os.getcwd()}\n",style='bold')
 
 
     files = pickfile(path1[-1])
@@ -121,7 +122,11 @@ def menu():
     print('\n')
     print(f"targeted file is ",end='')
     c.print(targeted_file[-1],style="bold underline")
-    print(f"\nmenu commands are:\n1. app cmds \n2. injection cmds \n3. fp commands\n")
+    
+    msg1 = """ [inj commands] - [fp cmds] - [about] - [exit] """
+    c.print(f"\n\ncommands: \n\n{escape(msg1)}\n",style='bold')
+    c.print("you can run '-ex cmds' to see an explaination of the commands.",style='color(8)')
+
    
 def interface():
 
@@ -132,28 +137,76 @@ def interface():
     inputs.append(f" {i_main} ")
 
 
-    if i_main == "app cmds":
 
-        print("\nabout: about the app.")
-        # to be continued 
+    if i_main == "about":
+        
+        subject = "     - flowprint:"
+        context = """
 
-    elif i_main == "about":
-        print("\nabout")
-        # print("commands explained")
+        its a tool made to analyze - track the code process , adding print statements in targeted inject points under [blue]if[/blue] conditions , or [#800080]def[/#800080] functions or [#af00ff]import[/#af00ff] lines to know what is going on live in your code.
+
+        you set the dir then the targeted file and when typing [bold]-fp scan[/bold] it'll show you how many available injecting points are in your code.
+
+        and if you type [bold]-fp -s scan[/bold] it'll show all points and its line numbers.
+
+        [bold]'-fp inject'[/bold] will help you inject print statements into your code with commands like [bold]'-fp inject def'[/bold] or [bold]-fp inject import[/bold] with tags to notice where were the prints written.
+
+        the rest of the commands are just base commands to change the dir or the file or to see the menu commands you can find them all after setting the dir and file you want when running the program.
+
+        its modularly structured , try [underline]python3 -m flowprint.run[/underline] to run your tool and better put in home dir.
+
+        make sure you have the libraries: [green]rich[/green] , [green]pathlib[/green] installed before running the project , it'll auto create an injected file from your same code but with print statements for safety reasons , and will be put in home/results folder. (dont worry if you dont have the file the tool will create it, its made for automated injecting and analyzing anyway).
+
+        the tool is in early versions and im just a jr coder in python so the code may not be the best but i will update it with time.
+
+        [bold]git clone git@github.com:xkm9/flowprint.git[/bold]
+
+        Made by: [bold]AuvaO[/bold]
+        (I'm not a native English speaker, so sorry if my grammar is not perfect.)
+
+
+        in summary:
+
+        a code analyzer that inject print statements around your code to trace its traffic movement.
+        """
+        
+
+        c.print(subject , "\n\n" , style="underline bold")
+        c.print(context)
+
+
+
+        
 
     elif i_main == "exit":
         check_exit.append("exit")
 
-    elif i_main == "injection cmds":
+    elif i_main == "inj commands":
+        print("\n")
+        c.print("-fp inject [purple]import[/purple]")
+        c.print("-fp inject [blue]class[/blue]")
+        c.print("-fp inject [purple]def[/purple]")
+        c.print("-fp inject [purple]while[/purple]")
+        c.print("-fp inject [blue]if[/blue]")
+        c.print("-fp inject [blue]elif[/blue]")
+        print("\n")
+        
 
-        c.print("\navalaible injecting commands: ", style='bold')
-        for inj in target_funcs:
-            print(f"-fp inject {inj}")
+
+    elif i_main == "fp cmds":
+        msg1 = """'-fp inject' to inject print statements in your code.\n'-fp scan' to scan and see how many available injecting points are i your code.\n'-fp -s scan' to show you all available injecting places with its line number.\n'-fp -a scan' to show you how many available injecting points in each different targets like def or import and also a list with recommended injections.\n'-fp change-file' to change your current file (!not recommended straight after injecting).\n'-fp add-dir' to dive more inside the dir you're currently in.\n'-fp reset-dir' to reset your to home. """
+        c.print(msg1, style='bold')
 
 
-    elif i_main == "fp commands":
-        print("\n-fp inject\n-fp scan\n-fp -s scan\n-fp change-file\n-fp add-dir\n-fp reset-dir ")
+    elif i_main == "-ex cmds":
+        msg = """
+        [bold underline]inj commands[/bold underline] does show a list of injection commands you can make.
+        [bold underline]fp cmds[/bold underline] does show you -fp commands you can use across the app like -fp change-file or -fp reset-dir
+        [bold underline]about[/bold underline] does show you the context of this tool.
+        exit to exit the running loop.
+        """
 
+        c.print(msg)
 
 
 
@@ -185,6 +238,8 @@ def set_data():
         index = sl["index"][i]
         pattern = sl["pattern"][i]
         tuples_scan.append((index , line , pattern))
+
+
 
 
     if len(file) > 1:
@@ -229,19 +284,34 @@ def run_injecting():
 
 def scan():
 
-
     c = Console()    
-    c.print(f"file is scanned , availabe injections are {len(tuples_scan)} points. ",style='bold underline')
-
-    pro_filter = pro_felter(inputs , ["-s"])
-
-    if pro_filter != None:
+    
+    pro_filter = pro_felter(inputs , ["-s","-a"])
+    pro_filter0 = pro_felter(inputs , ["scan"])
+    
+    if pro_filter == "-s":
         for i ,(index , line , pattern ) in enumerate(tuples_scan):
             msg1 = f"""
             inject {i} - 
             line num. {index} : {line}
             """
             c.print(" ",msg1,style="pink1")
+
+    
+    elif pro_filter == "-a":
+
+        s1 = pro_felter2(dic["source code"],target_funcs)
+        counter = Counter(s1)
+
+        for word , count in counter.items():
+            c.print(f"{count} {word} counted.",style="bold")
+
+
+
+
+
+    if pro_filter0:
+        c.print(f"\ntotal availabe injections are {len(tuples_scan)} points. ",style='bold underline')
 
 
     

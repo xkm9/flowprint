@@ -33,6 +33,24 @@ def pro_felter(l,t):
 
     return "".join(found) if found else None
 
+def pro_felter2(l,t):
+    found = []
+    list1 = l
+    target = t
+
+    for l1 in list1:
+
+        l2 = l1.split()
+        for l3 in l2:
+            for t1 in target:
+                if l3 == t1:
+                    found.append(l3)
+
+    return found if found else None
+
+
+
+
 
 
 def deep_felter(msg,target):
@@ -125,3 +143,18 @@ def search(message,target):
                     break
 
     return result if result else None
+
+def word_felter(message,target):
+
+    lines = []
+    targeted_commands = target
+
+    for msg in message:
+        targeted_message = msg.split()
+
+        for ts in targeted_commands:
+            for tm in targeted_message:
+                if ts == tm:
+                    lines.append(msg)
+
+    return lines if lines else None
