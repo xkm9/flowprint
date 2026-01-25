@@ -1,11 +1,11 @@
 # flowprint
 
-its a tool  made to analyze - track the code process , adding print statements in targeted inject points , under if conditions , or def functions or import lines to know what is going on live in your code.
+its a tool  made to analyze - track the code process , adding print statements in targeted points , under if conditions , or def functions or import lines to know what is going on live in your code.
 
 - you set the dir then the targeted file and when typing `-fp scan` it'll show you how many available injecting points are in your code
 - and if you type `-fp -s scan` it'll show all points and its line numbers.
 
-- `-fp inject` will help you inject print statements into your code with commands like `-fp inject def` or `-fp inject import` with tags to notice where were the prints written.
+- `-fp track` will help you inject print statements into your code with commands like `-fp track def` or `-fp track import` with tags to notice where were the prints written.
 
 
 the rest of the commands are just base commands to change the dir or the file or to see the menu commands you can find them all after setting the dir and file you want when running the program.
