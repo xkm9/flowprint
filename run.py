@@ -10,12 +10,12 @@ from collections import Counter
 from flowprint.lib.homemade import search, randomize , pickfile , pro_felter , pro_felter2
 
 # commands
-inject_cmds = ["inject"]
+track_cmds = ["trace"]
 target_funcs = ["class","def", "import","while","if","elif" ]
 
 
 # where matches go 
-inj_match = []
+track_match = []
 target_match = []
 
 # where inputs go
@@ -24,13 +24,13 @@ inputs = []
 # to check when exit command
 check_exit = []
 
-# the file lines will be packed - injected here.
+# the file lines will be packed - here
 packed_files = []
 
 # for the name of the file
 targeted_file = []
 
-# here is a tuples list holds a trio of : the line number , the line itself , and pattern to be injected 
+# here is a tuples list holds a trio of : the line number , the line itself , and pattern to be tracked
 tuples_scan = []
 
 # i forgot whats this for
@@ -44,7 +44,7 @@ ts_len = []
 
 # the main dictionary
 dic = {
-            "command type": inj_match , # inject match
+            "command type": track_match , # track match
             "fn type": target_match,  # targect funcs
             "source code": packed_files
             }
@@ -123,7 +123,7 @@ def menu():
     print(f"targeted file is ",end='')
     c.print(targeted_file[-1],style="bold underline")
     
-    msg1 = """ [inj commands] - [fp cmds] - [about] - [exit] """
+    msg1 = """ [trc commands] - [fp cmds] - [about] - [exit] """
     c.print(f"\n\ncommands: \n\n{escape(msg1)}\n",style='bold')
     c.print("you can run '-ex cmds' to see an explaination of the commands.",style='color(8)')
 
@@ -149,7 +149,7 @@ def interface():
 
         and if you type [bold]-fp -s scan[/bold] it'll show all points and its line numbers.
 
-        [bold]'-fp inject'[/bold] will help you inject print statements into your code with commands like [bold]'-fp inject def'[/bold] or [bold]-fp inject import[/bold] with tags to notice where were the prints written.
+        [bold]'-fp track'[/bold] will help you inject print statements into your code with commands like [bold]'-fp track def'[/bold] or [bold]-fp track import[/bold] with tags to notice where were the prints written.
 
         the rest of the commands are just base commands to change the dir or the file or to see the menu commands you can find them all after setting the dir and file you want when running the program.
 
@@ -181,26 +181,26 @@ def interface():
     elif i_main == "exit":
         check_exit.append("exit")
 
-    elif i_main == "inj commands":
+    elif i_main == "trc commands":
         print("\n")
-        c.print("-fp inject [purple]import[/purple]")
-        c.print("-fp inject [blue]class[/blue]")
-        c.print("-fp inject [purple]def[/purple]")
-        c.print("-fp inject [purple]while[/purple]")
-        c.print("-fp inject [blue]if[/blue]")
-        c.print("-fp inject [blue]elif[/blue]")
+        c.print("-fp track [purple]import[/purple]")
+        c.print("-fp track [blue]class[/blue]")
+        c.print("-fp track [purple]def[/purple]")
+        c.print("-fp track [purple]while[/purple]")
+        c.print("-fp track [blue]if[/blue]")
+        c.print("-fp track [blue]elif[/blue]")
         print("\n")
         
 
 
     elif i_main == "fp cmds":
-        msg1 = """'-fp inject' to inject print statements in your code.\n'-fp scan' to scan and see how many available injecting points are i your code.\n'-fp -s scan' to show you all available injecting places with its line number.\n'-fp -a scan' to show you how many available injecting points in each different targets like def or import and also a list with recommended injections.\n'-fp change-file' to change your current file (!not recommended straight after injecting).\n'-fp add-dir' to dive more inside the dir you're currently in.\n'-fp reset-dir' to reset your to home. """
+        msg1 = """'-fp track' to inject print statements in your code.\n'-fp scan' to scan and see how many available injecting points are i your code.\n'-fp -s scan' to show you all available injecting places with its line number.\n'-fp -a scan' to show you how many available injecting points in each different targets like def or import and also a list with recommended injections.\n'-fp change-file' to change your current file (!not recommended straight after injecting).\n'-fp add-dir' to dive more inside the dir you're currently in.\n'-fp reset-dir' to reset your to home. """
         c.print(msg1, style='bold')
 
 
     elif i_main == "-ex cmds":
         msg = """
-        [bold underline]inj commands[/bold underline] does show a list of injection commands you can make.
+        [bold underline]trc commands[/bold underline] does show a list of injection commands you can make.
         [bold underline]fp cmds[/bold underline] does show you -fp commands you can use across the app like -fp change-file or -fp reset-dir
         [bold underline]about[/bold underline] does show you the context of this tool.
         exit to exit the running loop.
@@ -217,8 +217,8 @@ def set_data():
     is_compare = i_compare.split()
 
     for isc in is_compare:
-        if isc in inject_cmds:
-            inj_match.append(isc)
+        if isc in track_cmds:
+            track_match.append(isc)
 
         elif isc in target_funcs:
             target_match.append(isc)
@@ -292,7 +292,7 @@ def scan():
     if pro_filter == "-s":
         for i ,(index , line , pattern ) in enumerate(tuples_scan):
             msg1 = f"""
-            inject {i} - 
+            track {i} - 
             line num. {index} : {line}
             """
             c.print(" ",msg1,style="pink1")
@@ -331,7 +331,7 @@ def runner():
             for isc1 in isc0:
                 if isc1 == "-fp":
                     for isc2 in isc0:
-                        if isc2 == "inject":
+                        if isc2 == "track":
                             set_data()
                             run_injecting()
 
@@ -353,7 +353,7 @@ def runner():
 
                     # cleaning
                     inputs.clear()
-                    inj_match.clear()
+                    track_match.clear()
                     target_match.clear()
                     packed_files.clear()
                     tuples_scan.clear()
