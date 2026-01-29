@@ -21,4 +21,6 @@ make sure you have the libraries: rich , pathlib installed before running the pr
 - `git clone git@github.com:xkm9/flowprint.git`
 
 **Made by:** AuvaO  
+
+version 1.3.4
 *(I'm not a native English speaker, so sorry if my grammar is not perfect.)*
