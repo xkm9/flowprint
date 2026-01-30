@@ -20,7 +20,7 @@ make sure you have the libraries: rich , pathlib installed before running the pr
 
 - `git clone git@github.com:xkm9/flowprint.git`
 
-version 1.3.4
+version 1.4.5
 
 **Made by:** AuvaO  
 *(I'm not a native English speaker, so sorry if my grammar is not perfect.)*

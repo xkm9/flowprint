@@ -7,10 +7,10 @@ from pathlib import Path
 from collections import Counter
 
 # summon my homemade lib
-from flowprint.lib.homemade import search, randomize , pickfile , pro_felter , pro_felter2
+from flowprint.utlis.homemade import search, randomize , pickfile , pro_felter , pro_felter2
 
 # commands
-track_cmds = ["trace"]
+track_cmds = ["track"]
 target_funcs = ["class","def", "import","while","if","elif" ]
 
 
